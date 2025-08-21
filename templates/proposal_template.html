@@ -1,0 +1,71 @@
+<!doctype html>
+</div>
+</section>
+
+
+<section>
+<h2>Scope</h2>
+<ul>
+{% for item in project.scope %}
+<li>{{ item }}</li>
+{% endfor %}
+</ul>
+
+<style>
+  body { background: #fff; color: #0a0a0a; }   /* <--- force white background + black text */
+  .wrap { max-width: 840px; margin: 40px auto; padding: 0 24px; background: #fff; }
+</style>
+
+<h2 style="margin-top:16px;">Deliverables</h2>
+<ul>
+{% for d in project.deliverables %}
+<li>{{ d }}</li>
+{% endfor %}
+</ul>
+</section>
+
+
+<section>
+<div class="card">
+<h2>Investment</h2>
+<div class="price">{{ project.price }}</div>
+<p class="muted">Valid until {{ project.valid_until }}</p>
+<h3 style="margin-top:12px;">Payment terms</h3>
+<p>{{ project.payment_terms }}</p>
+{% if project.notes %}
+<h3>Notes</h3>
+<p>{{ project.notes }}</p>
+{% endif %}
+</div>
+</section>
+
+
+{% if include_tos %}
+<section>
+<h2>Terms & Acceptance</h2>
+<p>By signing below, {{ client.name }} agrees to the scope, investment, and terms outlined in this proposal.</p>
+<div class="row" style="margin-top:24px; align-items:flex-end;">
+<div class="col">
+{% if assets.sign_data_uri %}
+<img class="signature" src="{{ assets.sign_data_uri }}" alt="signature" />
+{% else %}
+<div style="height:56px; border-bottom:1px solid var(--gray-3);"></div>
+{% endif %}
+<div class="muted">Authorized Signature</div>
+</div>
+<div class="col">
+<div style="height:56px; border-bottom:1px solid var(--gray-3);"></div>
+<div class="muted">Date</div>
+</div>
+</div>
+</section>
+{% endif %}
+
+
+<footer class="footer">
+<div class="muted">{{ sender.email }} • {{ sender.phone }}</div>
+<div class="muted">{{ client.contact }}</div>
+</footer>
+</div>
+</body>
+</html>
